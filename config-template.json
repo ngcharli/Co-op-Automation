@@ -1,0 +1,22 @@
+{
+  "auth_security_store": {
+    "profile_name": "YOUR_USERNAME",
+    "cert_file_path": "C:\\Users\\YOUR_USERNAME\\Documents\\cert.epf"
+  },
+  "app_config": {
+    "url": "https://example-staging.internal/app/",
+    "report_folder_path": ["Team", "Reports", "Monthly"],
+    "download_dir": "C:\\temp\\downloads",
+    "wait_for_download_seconds": 30
+  },
+  "selection_options": {
+    "regions": [
+      "Region Alpha",
+      "Region Beta"
+    ],
+    "roles": [
+      "Role A",
+      "Role B"
+    ]
+  }
+}

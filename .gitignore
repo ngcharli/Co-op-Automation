@@ -1,0 +1,34 @@
+# ==========================================
+# 1. Active Configuration & Sensitive Data
+# ==========================================
+# Exclude actual config containing credentials/local paths
+config.json
+
+# Exclude generated/downloaded reports or exports
+data/
+reports/
+
+# ==========================================
+# 2. Build Outputs & IDE Files
+# ==========================================
+# Maven build directory
+target/
+
+# IntelliJ IDEA project configuration
+.idea/
+*.iml
+
+# Maven Wrapper binaries (optional, keep src/pom.xml tracked)
+.mvn/
+
+# ==========================================
+# 3. Virtual Environments & Local Tooling
+# ==========================================
+# Python virtual environment (if present)
+.venv/
+
+# ==========================================
+# 4. OS-Generated Files
+# ==========================================
+.DS_Store
+Thumbs.db
