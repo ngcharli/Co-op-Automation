@@ -1,17 +1,37 @@
 package Tests;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-import com.automation.pages.BasePage;
-import org.testng.annotations.Test;
+import java.time.Duration;
 
-public class LoginTest extends BaseTest {
+public abstract class BaseTest {
 
-  @Test
-  public void testSunnyPathLogin() {
-    // Your sunny path steps here
+  private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+  public WebDriver getDriver() {
+    return driver.get();
   }
 
-  @Test
-  public void testAlternativePathInvalidCredentials() {
-    // Your alternative path steps here
+  @BeforeMethod
+  public void setUp() {
+    EdgeOptions options = new EdgeOptions();
+    options.addArguments("--start-maximized");
+
+    // Selenium Manager automatically detects, downloads, and matches msedgedriver
+    WebDriver localDriver = new EdgeDriver(options);
+    localDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+    driver.set(localDriver);
+  }
+
+  @AfterMethod
+  public void tearDown() {
+    if (getDriver() != null) {
+      getDriver().quit();
+      driver.remove();
+    }
   }
 }

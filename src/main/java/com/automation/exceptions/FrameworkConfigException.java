@@ -5,4 +5,8 @@ public class FrameworkConfigException extends RuntimeException {
   public FrameworkConfigException(String message) {
     super(message);
   }
+
+  public FrameworkConfigException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }
