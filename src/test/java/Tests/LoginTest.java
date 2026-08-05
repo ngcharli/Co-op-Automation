@@ -16,6 +16,7 @@ public class LoginTest extends BaseTest {
     // Your sunny path steps here
   }
 
+
   @Test
   public void testAlternativePathInvalidCredentials() {
     // Your alternative path steps here

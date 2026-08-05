@@ -45,12 +45,28 @@ public class Main {
         throw new FrameworkConfigException("Missing 'download_dir' key under 'app_config' in config.json.", e);
       }
 
-      // 3. Trigger interactive CLI selection tools
+      // 3. Initialize the DesktopAuthHandler instance
+      DesktopAuthHandler authHandler = new DesktopAuthHandler(config);
+
+      // 4. Trigger interactive CLI selection tools
       String[] selections = CLI.promptSelections(config);
       String region = selections[0];
       String role = selections[1];
 
-      // 4. Instantiate and execute the core automation engine
+      // 5. Start background thread to watch for and handle the Entrust dialog
+      Thread authWatcherThread = new Thread(() -> {
+        try {
+          System.out.println("[*] Background thread listening for Entrust Security Store dialog...");
+          authHandler.login();
+        } catch (Exception e) {
+          System.err.println("[!] Background Auth Handler encountered an error: " + e.getMessage());
+        }
+      }, "Entrust-Auth-Watcher");
+
+      authWatcherThread.setDaemon(true);
+      authWatcherThread.start();
+
+      // 6. Instantiate and execute the core automation engine
       AutomationEngine engine = new AutomationEngine(config);
       engine.runAutomation(region, role);
 
